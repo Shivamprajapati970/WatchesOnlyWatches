@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} All Product {% endblock title %}
+
+{% block main-content %}
+
+<div class="container">
+    <h2 class="text-center fst-italic">MyShop Watches</h2>
+    <br><br>
+        <!--div class="container">
+            <div class="row">
+                {% for cd in all_data %}
+                <div class="col-md-4 mb-4" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration:1s; animation-delay:0.6s;animation-name:none;">
+                    <div class="card goodnesssec buttermilk curdbgpro">
+                        <a href="{% url 'ProductDetail' cd.id %}">
+                            <img src="{{cd.image.url}}" class="card-img-top" alt="{{cd.category_name}}" width="300px" height="300px">
+                            <div class="fw-bold text-black text-center">{{cd.name|slice:":100"}}</div>
+                            <div class="fw-bold text-danger text-center">
+                                Rs. {{cd.discounted_price}} /-
+                                <small class="fw-light text-decoration-line-through">
+                                    {{cd.selling_price}}
+                                </small>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div--> 
+        <div class="row">
+            <div class="col-sm-2 border-end">
+                <div class="list-group">
+                    <h4 class="text-success" >Category Wise</h4>
+                    <ul class="list-group ">
+                        <a href="/allproduct/" class="list-group-item list-group-item-action text-primary" aria-current="true"><li class="list-group-item text-primary">All item</li></a>
+                        {% for c in category_data %}
+                            <a href="/allproduct/?cat_id={{c.id}}" class="list-group-item list-group-item-action text-primary" aria-current="true"><li class="list-group-item text-primary">{{c.category_name}}</li></a>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <h4 class="text-success " >Brand Wise</h4>
+                    <ul class="list-group ">
+                        {% for b in brand_data %}
+                            <a href="/allproduct/?brand_id={{b.id}}" class="list-group-item list-group-item-action text-primary" aria-current="true"><li class="list-group-item text-primary">{{b.brand_name}}</li></a>
+                        {% endfor %}
+                    </ul>
+
+                    <br>
+                    <h4 class="text-success " >Price Wise</h4>
+                    <ul class="list-group ">
+                        <form action="/allproduct/" method="post">
+                            {% csrf_token %}
+                            <span id="show" class="text-danger"></span>
+                            <input type="range"  min="0" max="100" name="price" onchange="valuechange()" class="form-range"  id="value">
+                            <input type="submit" value="Filter" class="btn btn-primary">
+                        </form>
+                    </ul>
+                     
+                </div>
+            </div>
+            <div class="col-sm-9 offset-sm-1">
+                <div class="row">
+                    {% for cd in all_data %}
+                    <div class="col-md-4 mb-4" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration:1s; animation-delay:0.6s;animation-name:none;">
+                        <div class="card goodnesssec buttermilk curdbgpro">
+                            <a href="{% url 'ProductDetail' cd.id %}">
+                                <img src="{{cd.image.url}}" class="card-img-top" alt="{{cd.category_name}}" width="200px" height="200px">
+                                <div class="fw-bold text-black text-center">{{cd.name}}</div>
+                                <div class="fw-bold text-danger text-center">
+                                    Rs. {{cd.discounted_price}} /-
+                                    <small class="fw-light text-decoration-line-through">
+                                        {{cd.selling_price}}
+                                    </small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>   
+</div>
+
+{% endblock main-content %}

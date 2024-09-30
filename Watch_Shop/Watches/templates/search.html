@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Serach Result{% endblock title %}
+
+{% block main-content %}
+
+<div class="container my-5">
+    <!--div class="row">
+        <div class="col-sm-8">
+            <div class="row">
+                {% for prod in product %}
+                    <div class="col-sm-4 text-center mb-4 hover-shadow">
+                        <a href="{% url 'ProductDetail' prod.id %}" class="btn">
+                            <div>
+                                <img src="{{prod.image.url}}" width="300px" height="200px" />
+                                <div class="fw-bold">{{prod.name}}</div>
+                                <div class="fw-bold text-danger">
+                                    Rs. {{prod.discounted_price}}/-
+                                    <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div-->
+
+    <!--div class="container">
+        <div class="col-sm-12">
+            <div class="row">
+                {% for pdc in product %}
+                <div class="col text-center mb-4">
+                    <a href="{% url 'ProductDetail' pdc.id %}" class="btn">
+                        <div class="goodnesssec buttermilk curdbgpro">
+                            <img src="{{pdc.image.url}}" width="300px" height="300px" />
+                            <div class="fw-bold">{{pdc.name}}</div>
+                            <div class="fw-bold text-danger">
+                                Rs. {{pdc.discounted_price}} /-
+                                <small class="fw-light text-decoration-line-through">
+                                    {{pdc.selling_price}}
+                                </small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br><br> <br> <br-->
+
+    <div class="container">
+        <div class="row">
+            {% for cd in product %}
+            <div class="col-md-4 mb-4" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration:1s; animation-delay:0.6s;animation-name:none;">
+                <div class="card goodnesssec buttermilk smbg">
+                    <a href="{% url 'ProductDetail' cd.id %}">
+                        <img src="{{cd.image.url}}" class="card-img-top" alt="{{cd.category_name}}"width="300px" height="300px">
+                        <div class="fw-bold text-black text-center">{{cd.name|slice:":50"}}</div>
+                        <div class="fw-bold text-danger text-center">
+                            Rs. {{cd.discounted_price}} /-
+                            <small class="fw-light text-decoration-line-through">
+                                {{cd.selling_price}}
+                            </small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock main-content %}

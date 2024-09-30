@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block banner-slider %}
+ <div class="container">
+    
+    <div class="row flex justify-content-between mt-5">
+        <hr>
+        <div class="img2 col-lg-5 mt-5">
+            <img src="{{product.image.url}}" class="image col-xs-6 col-sm-12 col-lg-12 mt-3 text-sm-center w-100 h-75" alt="{{product.name}}" />
+        </div>
+        <div class="productdetail col-lg-5 ">
+            <h1 style=" font-family: Georgia;font-size:50px;">{{product.brand}}</h1>
+            <h5>{{product.name}}</h5>
+            <h5>Rs. {{product.discounted_price}} /-</h5>
+            <small class="text-decoration-line-through text-muted fs-5"><del>Rs. {{product.selling_price}} /-</del></small>
+            <br/><br/>
+            <h2>Product Description</h2>
+            <h3 class="fs-5" style="font-family:Rajdhani">{{product.description}}</h3>
+            <br>
+            <form action="/add_to_cart/" class="d-inline">
+                <input type="hidden" name="prod_id" value={{product.id}}>
+                <button type="submit" class="btn btn-primary shadow px-5 py-2"> Add to Cart</button>
+            </form>
+            
+            <div class=" btn btn-warning shadow px-5 py-2"><a href="{% url 'showcart' %}" class="text-decoration-none text-white">Buy Now</a></div>
+        </div>
+        <hr>
+    </div>
+    <br>
+ </div>
+{% endblock banner-slider %}
+{% block main-content %}
+    <div class="container">
+        <div class="row">
+            {% for cd in rel_product %}
+            <div class="col-md-4 mb-4" data-wow-duration="1s" data-wow-delay="0.6s" style="animation-duration:1s; animation-delay:0.6s;animation-name:none;">
+                <div class="card goodnesssec buttermilk smbg">
+                    <a href="{% url 'ProductDetail' cd.id %}">
+                        <img src="{{cd.image.url}}" class="card-img-top" alt="{{cd.category_name}}"width="300px" height="300px">
+                        <div class="fw-bold text-black text-center">{{cd.name|slice:":50"}}</div>
+                        <div class="fw-bold text-danger text-center">
+                            Rs. {{cd.discounted_price}} /-
+                            <small class="fw-light text-decoration-line-through">
+                                {{cd.selling_price}}
+                            </small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div><br><br>
+{% endblock main-content %}
